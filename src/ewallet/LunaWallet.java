@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import util.DateUtil;
 import javax.swing.*;
+
+import ewallet.LunaWalletDB.BalanceLimitExceeded;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +24,14 @@ import java.awt.event.ActionListener;
  */
 public class LunaWallet {
 	private LunaWalletDB wallet;
-	enum Page { DASHBOARD, TOP_UP, VIEW_TRANSACTIONS, SETTINGS, UPDATE_PIN, UPDATE_SECURITY_QUESTION, DEACTIVATE_WALLET, EXIT };
+	private JFrame frame;
+	private JPanel mainPanel;
+	private CardLayout cardLayout;
+	private enum Page { DASHBOARD, TOP_UP, VIEW_TRANSACTIONS, SETTINGS, UPDATE_PIN, UPDATE_SECURITY_QUESTION, DEACTIVATE_WALLET, EXIT };
+	
+	public static void main(String[] args) {
+		new LunaWallet("1");
+	}
 	
 	LunaWallet(String UID) {
 		
@@ -31,53 +41,130 @@ public class LunaWallet {
 		} catch (LunaWalletDB.UidNotFound e) {
 			// Ask user to activate LunaWallet
 		}
+		
+		frame = new JFrame("Del Luna Hotel App");
+		frame.setSize(500, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		
+		// Set CardLayout
+		cardLayout = new CardLayout();
+		mainPanel = new JPanel(cardLayout);
+		
+		// Add different page
+		mainPanel.add(createDashboardPage(), Page.DASHBOARD.toString());
+		mainPanel.add(createTopUpPage(), Page.TOP_UP.toString());
+		
+		frame.add(mainPanel);
+		frame.setVisible(true);
 	}
 	
-	void main() {
-		Page curPage = Page.DASHBOARD;
-		while (curPage != Page.EXIT) {
-			switch (curPage) {
-			case DASHBOARD:
-				new Dashboard();
-				break;
-			case TOP_UP:
-				TopUp();
-				break;
-			case VIEW_TRANSACTIONS:
-				ViewTransactions();
-				break;
-			case SETTINGS:
-				Settings();
-				break;
-			case UPDATE_PIN:
-				UpdatePIN();
-				break;
-			case UPDATE_SECURITY_QUESTION:
-				UpdateSecurityQuestion();
-				break;
-			case DEACTIVATE_WALLET:
-				DeactivateWallet();
-				break;
-			case EXIT:
-				return;
+	private JPanel createDashboardPage() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		
+		JLabel label = new JLabel("Welcome to Del Luna Hotel!", JLabel.CENTER);
+		
+		JPanel buttonPanel = new JPanel();
+		JButton topUpButton = new JButton("Top Up");
+		JButton viewTransactionsButton = new JButton("View Transactions");
+		JButton settingsButton = new JButton("Settings");
+		
+		topUpButton.addActionListener(e -> cardLayout.show(mainPanel, Page.TOP_UP.toString()));
+		viewTransactionsButton.addActionListener(e -> cardLayout.show(mainPanel, Page.VIEW_TRANSACTIONS.toString()));
+		settingsButton.addActionListener(e -> cardLayout.show(mainPanel, Page.SETTINGS.toString()));
+		
+		panel.add(label, BorderLayout.CENTER);
+		buttonPanel.add(topUpButton);
+		buttonPanel.add(viewTransactionsButton);
+		buttonPanel.add(settingsButton);
+		panel.add(buttonPanel, BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	
+	private JPanel createTopUpPage() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		
+		double curBalance = wallet.getBalance();
+		
+		JLabel label = new JLabel(Double.toString(curBalance), JLabel.CENTER);
+		
+		JButton rm10Button = new JButton("10");
+		JButton rm20Button = new JButton("20");
+		JButton rm50Button = new JButton("50");
+		JButton rm100Button = new JButton("100");
+		JButton customAmount = new JButton("Custom");
+		JButton backButton = new JButton("Back");
+		
+		rm10Button.addActionListener(e -> {
+			try {
+				wallet.topUpBalance(10);
+				label.setText(Double.toString(wallet.getBalance()));
+			} catch (BalanceLimitExceeded e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-		}
-	}
-	
-	class Dashboard extends JFrame {
-		private JLabel balanceLabel;
+		});
 		
-		public Dashboard() {
-			// Set up JFrame
-			setTitle("Luna Wallet Dashboard");
-			setSize(300, 200);
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setLayout(new BorderLayout());
-		}
-	}
-	
-	void TopUp() {
+		rm20Button.addActionListener(e -> {
+			try {
+				wallet.topUpBalance(20);
+				label.setText(Double.toString(wallet.getBalance()));
+			} catch (BalanceLimitExceeded e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		
+		rm50Button.addActionListener(e -> {
+			try {
+				wallet.topUpBalance(50);
+				label.setText(Double.toString(wallet.getBalance()));
+			} catch (BalanceLimitExceeded e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		rm100Button.addActionListener(e -> {
+			try {
+				wallet.topUpBalance(100);
+				label.setText(Double.toString(wallet.getBalance()));
+			} catch (BalanceLimitExceeded e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		customAmount.addActionListener(e -> {
+			try {
+				wallet.topUpBalance(1_000_000);
+				label.setText(Double.toString(wallet.getBalance()));
+			} catch (BalanceLimitExceeded e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		backButton.addActionListener(e -> cardLayout.show(mainPanel, Page.DASHBOARD.toString()));
+		
+		JPanel buttonPanel1 = new JPanel();
+		buttonPanel1.add(rm10Button);
+		buttonPanel1.add(rm20Button);
+		buttonPanel1.add(rm50Button);
+		buttonPanel1.add(rm100Button);
+		buttonPanel1.add(customAmount);
+		
+		JPanel buttonPanel2 = new JPanel();
+		buttonPanel2.add(backButton);
+		
+		panel.add(label, BorderLayout.CENTER);
+		panel.add(buttonPanel1, BorderLayout.SOUTH);
+		panel.add(buttonPanel2, BorderLayout.EAST);
+		
+		return panel;
 	}
 	
 	void ViewTransactions() {
