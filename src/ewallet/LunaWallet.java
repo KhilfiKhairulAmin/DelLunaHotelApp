@@ -54,6 +54,7 @@ public class LunaWallet {
 		// Add different page
 		mainPanel.add(createDashboardPage(), Page.DASHBOARD.toString());
 		mainPanel.add(createTopUpPage(), Page.TOP_UP.toString());
+		mainPanel.add(createSettingsPage(), Page.SETTINGS.toString());
 		
 		frame.add(mainPanel);
 		frame.setVisible(true);
@@ -171,8 +172,19 @@ public class LunaWallet {
 		
 	}
 	
-	void Settings() {
+	private JPanel createSettingsPage() {
+		JPanel panel = new JPanel();
 		
+		JButton changePinButton = new JButton("Change PIN");
+		JButton securityQuestionsButton = new JButton("Change Security Question");
+		
+		changePinButton.addActionListener(e -> cardLayout.show(mainPanel, Page.UPDATE_PIN.toString()));
+		changePinButton.addActionListener(e -> cardLayout.show(mainPanel, Page.UPDATE_SECURITY_QUESTION.toString()));
+		
+		panel.add(changePinButton);
+		panel.add(securityQuestionsButton);
+		
+		return panel;
 	}
 	
 	void UpdatePIN() {
