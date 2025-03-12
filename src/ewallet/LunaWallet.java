@@ -7,17 +7,9 @@
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
 package ewallet;
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-import util.DateUtil;
 import javax.swing.*;
-
-import ewallet.LunaWalletDB.BalanceLimitExceeded;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * Handles user interface for LunaWallet
@@ -44,17 +36,37 @@ public class LunaWallet {
 		
 		frame = new JFrame("Del Luna Hotel App");
 		frame.setSize(500, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		
 		// Set CardLayout
 		cardLayout = new CardLayout();
 		mainPanel = new JPanel(cardLayout);
 		
+		// Frame Listener
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// Call these functions before closing
+				wallet.save();
+				
+				// Ask for confirmation before exit
+				int choice = JOptionPane.showConfirmDialog(frame, "Do you really want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+				if (choice == JOptionPane.YES_OPTION) {
+					frame.dispose();
+					System.exit(0);
+				}
+				
+			}
+		});
+		
 		// Add different page
 		mainPanel.add(createDashboardPage(), Page.DASHBOARD.toString());
 		mainPanel.add(createTopUpPage(), Page.TOP_UP.toString());
 		mainPanel.add(createSettingsPage(), Page.SETTINGS.toString());
+		mainPanel.add(createUpdatePINPage(), Page.UPDATE_PIN.toString());
+		mainPanel.add(createUpdateSecurityQuestionPage(), Page.UPDATE_SECURITY_QUESTION.toString());
 		
 		frame.add(mainPanel);
 		frame.setVisible(true);
@@ -103,7 +115,7 @@ public class LunaWallet {
 			try {
 				wallet.topUpBalance(10);
 				label.setText(Double.toString(wallet.getBalance()));
-			} catch (BalanceLimitExceeded e1) {
+			} catch (LunaWalletDB.BalanceLimitExceeded e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -113,7 +125,7 @@ public class LunaWallet {
 			try {
 				wallet.topUpBalance(20);
 				label.setText(Double.toString(wallet.getBalance()));
-			} catch (BalanceLimitExceeded e1) {
+			} catch (LunaWalletDB.BalanceLimitExceeded e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -123,7 +135,7 @@ public class LunaWallet {
 			try {
 				wallet.topUpBalance(50);
 				label.setText(Double.toString(wallet.getBalance()));
-			} catch (BalanceLimitExceeded e1) {
+			} catch (LunaWalletDB.BalanceLimitExceeded e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -133,7 +145,7 @@ public class LunaWallet {
 			try {
 				wallet.topUpBalance(100);
 				label.setText(Double.toString(wallet.getBalance()));
-			} catch (BalanceLimitExceeded e1) {
+			} catch (LunaWalletDB.BalanceLimitExceeded e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -143,7 +155,7 @@ public class LunaWallet {
 			try {
 				wallet.topUpBalance(1_000_000);
 				label.setText(Double.toString(wallet.getBalance()));
-			} catch (BalanceLimitExceeded e1) {
+			} catch (LunaWalletDB.BalanceLimitExceeded e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -177,147 +189,98 @@ public class LunaWallet {
 		
 		JButton changePinButton = new JButton("Change PIN");
 		JButton securityQuestionsButton = new JButton("Change Security Question");
+		JButton backButton = new JButton("Back");
 		
 		changePinButton.addActionListener(e -> cardLayout.show(mainPanel, Page.UPDATE_PIN.toString()));
-		changePinButton.addActionListener(e -> cardLayout.show(mainPanel, Page.UPDATE_SECURITY_QUESTION.toString()));
+		securityQuestionsButton.addActionListener(e -> cardLayout.show(mainPanel, Page.UPDATE_SECURITY_QUESTION.toString()));
+		backButton.addActionListener(e -> cardLayout.show(mainPanel, Page.DASHBOARD.toString()));
 		
 		panel.add(changePinButton);
 		panel.add(securityQuestionsButton);
+		panel.add(backButton);
 		
 		return panel;
 	}
 	
-	void UpdatePIN() {
+	JPanel createUpdatePINPage() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(6, 1));
 		
-	}
-	
-	void UpdateSecurityQuestion() {
+		JLabel promptPinLabel = new JLabel("Please enter current PIN");
+		JPasswordField pinField = new JPasswordField();
 		
-	}
-	
-	void DeactivateWallet() {
+		JLabel promptNewPinLabel = new JLabel("Please enter new PIN");
+		JPasswordField newPinField = new JPasswordField();
 		
-	}
-	
-	
-}
-
-/**
- * Handles database operations for LunaWallet
- */
-class LunaWalletDB implements AutoCloseable {
-	private String UID = "";
-	private String pinHash;
-	private double balance;
-	private int lunaPoints;
-	private String securityQuestion;
-	private String securityAnswerHash;
-	private String dateCreated;
-	private String lastUpdated;
-	private static final String FILE_PATH = "Wallet.txt";
-	private static final double BALANCE_LIMIT = 100_000;
-	
-	/**
-	 * Loads user LunaWallet based on UID
-	 * @param UID
-	 * @throws UidNotFound 
-	 */
-	LunaWalletDB(String UID) throws UidNotFound {
-		try (Scanner sc = new Scanner(new File(FILE_PATH))) {
+		JButton submitButton = new JButton("Submit");
+		
+		panel.add(promptPinLabel);
+		panel.add(pinField);
+		panel.add(promptNewPinLabel);
+		panel.add(newPinField);
+		panel.add(submitButton);
+		
+		submitButton.addActionListener(e -> {
+			String oldPin = new String(pinField.getPassword());
+			String newPin = new String(newPinField.getPassword());
 			
-			boolean isHeader = true;
-			while (sc.hasNextLine()) {
-				
-				String line = sc.nextLine();
-				
-				if (isHeader) {
-					isHeader = false;
-					continue;
-				}
-				
-				String[] data = line.split(",");
-				
-				
-				String uid = data[0];
-				
-				if (!uid.equals(UID)) {
-					continue;
-				}
-				this.UID = uid;
-				this.pinHash = data[1];
-				this.balance = Double.parseDouble(data[2]);
-				this.lunaPoints = Integer.parseInt(data[3]);
-				this.securityQuestion = data[4];
-				this.securityAnswerHash = data[5];
-				this.dateCreated = data[6];
-				this.lastUpdated = data[7];
+			if (oldPin.equals(wallet.getPinHash())) {
+				wallet.setPin(newPin);
+				JOptionPane.showMessageDialog(null, "PIN changed successfully!");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Wrong PIN entered!");
 			}
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			cardLayout.show(mainPanel, Page.SETTINGS.toString());
+			pinField.setText("");
+			newPinField.setText("");
+		});
 		
-		if (!this.UID.equals(UID)) {
-			throw new UidNotFound(UID);
-		}
+		return panel;
 	}
 	
-	/**
-	 * Top up balance amount
-	 * @param amount
-	 * @throws BalanceLimitExceeded 
-	 */
-	void topUpBalance(double amount) throws BalanceLimitExceeded {
-		if (balance + amount > BALANCE_LIMIT) {
-			throw new BalanceLimitExceeded();
-		}
-		balance += amount;
+	JPanel createUpdateSecurityQuestionPage() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(5, 1));
+		
+		JLabel prompt = new JLabel("Please choose a question & answer");
+		
+		String[] securityQuestions = {
+				"What was the name of your first pet?",
+				"What is the name of the city where you were born?",
+				"What is your favorite teacher’s name?",
+				"What was the make and model of your first car?",
+				"What is your mother’s maiden name?"
+				};
+        JComboBox<String> securityQuestionsBox = new JComboBox<>(securityQuestions);
+        
+        JTextField answerField = new JTextField();
+        
+        JButton submitButton = new JButton("Submit");
+        JButton backButton = new JButton("Back");
+        
+        backButton.addActionListener(e -> cardLayout.show(mainPanel, Page.SETTINGS.toString()));
+        submitButton.addActionListener(e -> {
+        	String selected = (String) securityQuestionsBox.getSelectedItem();
+        	String answer = answerField.getText();
+        	
+        	if (!answer.equals("")) {
+        		wallet.setSecurityQuestion(selected, answer);
+        		JOptionPane.showMessageDialog(null, "Successfully updated your Security Question");
+        		cardLayout.show(mainPanel, Page.SETTINGS.toString());
+        	} else {
+        		JOptionPane.showMessageDialog(null, "Please provide an Answer");
+        	}
+        });
+        
+        panel.add(prompt);
+        panel.add(securityQuestionsBox);
+        panel.add(answerField);
+        panel.add(submitButton);
+        panel.add(backButton);
+        
+        return panel;
 	}
-	
-	/**
-	 * Deduct money from Wallet
-	 * @param amount
-	 * @throws NotEnoughBalance 
-	 */
-	void deductBalance(double amount) throws NotEnoughBalance {
-		if (balance - amount < 0) {
-			throw new NotEnoughBalance();
-		}
-		balance -= amount;
-	}
-	
-	/**
-	 * Returns amount of balance inside Wallet
-	 * @return
-	 */
-	double getBalance() {
-		return balance;
-	}
-	
-    public static class UidNotFound extends Exception {
-		private static final long serialVersionUID = -4102964319935793290L;
-
-		public UidNotFound(String UID) {
-            super("UID " + UID + " doesn't exist");
-        }
-    }
-    
-    public static class BalanceLimitExceeded extends Exception {
-		private static final long serialVersionUID = -5197016556609704353L;
-
-		public BalanceLimitExceeded() {
-    		super("Balance limit exceeded RM " + BALANCE_LIMIT);
-    	}
-    }
-    
-    public static class NotEnoughBalance extends Exception {
-		private static final long serialVersionUID = -9058636885723273681L;
-
-		public NotEnoughBalance() {
-    		super("Not enough balance");
-    	}
-    }
-    
-    @Override
-    public void close() {}
 }
+
