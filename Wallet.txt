@@ -1,2 +1,0 @@
-UID,PIN,Balance,LunaPoints,SecQuestion,SecAnswer,DateCreated,LastUpdated
-1,123456,5750.0,0,What is the name of the city where you were born?,Kangar,2005-03-20,2005-03-20

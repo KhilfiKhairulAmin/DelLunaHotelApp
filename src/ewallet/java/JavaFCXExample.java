@@ -1,4 +1,4 @@
-package ewallet;
+package ewallet.java;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class JavaFXExample extends Application {
+public class JavaFCXExample extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox root = new VBox(10);

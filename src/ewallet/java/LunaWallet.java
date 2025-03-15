@@ -6,7 +6,7 @@
  * The purpose of the e-wallet is for transactions.
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
-package ewallet;
+package ewallet.java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -70,6 +70,7 @@ public class LunaWallet {
 		
 		frame.add(mainPanel);
 		frame.setVisible(true);
+
 	}
 	
 	private JPanel createDashboardPage() {

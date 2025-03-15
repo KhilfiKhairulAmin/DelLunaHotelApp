@@ -6,7 +6,7 @@
  * The purpose of the e-wallet is for transactions.
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
-package ewallet;
+package ewallet.java;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -25,7 +25,7 @@ class LunaWalletDB implements AutoCloseable {
 	private String securityAnswerHash;
 	private String dateCreated;
 	private String lastUpdated;
-	private static final String FILE_PATH = "Wallet.txt";
+	private static final String FILE_PATH = "src/database/Wallet.txt";
 	private static final double BALANCE_LIMIT = 100_000;
 	
 	/**
