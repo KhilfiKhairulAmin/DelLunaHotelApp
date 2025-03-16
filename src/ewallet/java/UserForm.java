@@ -1,4 +1,4 @@
-package ewallet;
+package ewallet.java;
 
 import javax.swing.*;
 import java.awt.*;
