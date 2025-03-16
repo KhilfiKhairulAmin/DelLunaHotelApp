@@ -1,0 +1,21 @@
+.rounded-image {
+	-fx-background-radius: 200;
+	-fx-border-radius: 200;
+	-fx-border-color: white;
+}
+
+.sidebar {
+	-fx-background-color: #6e62aa;
+}
+
+.sidebar-component {
+	-fx-background-color: #6e62aa;
+}
+
+.sidebar-component:hover {
+	-fx-background-color: #6152a8;
+}
+
+.sidebar-whitespace {
+	-fx-background-color: #6e62aa;
+}

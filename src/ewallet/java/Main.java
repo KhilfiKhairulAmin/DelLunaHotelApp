@@ -9,9 +9,15 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/ewallet/views/EWalletMainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ewallet/views/EWalletMainView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        MainController controller = loader.getController();
+        controller.setStage(primaryStage); // Set stage for switching
+        scene.getStylesheets().add(getClass().getResource("/ewallet/views/styles.css").toExternalForm());
         primaryStage.setTitle("LunaWallet Dashboard");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
