@@ -1,2 +1,2 @@
 UID,PIN,Balance,LunaPoints,SecQuestion,SecAnswer,DateCreated,LastUpdated
-1,098765,5950.0,0,What is your favorite teacher’s name?,Haryti,2005-03-20,2005-03-20
+1,098765,6100.0,0,What is your favorite teacher’s name?,Haryti,2005-03-20,2005-03-20
