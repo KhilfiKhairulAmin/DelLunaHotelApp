@@ -1,4 +1,4 @@
-package ewallet.java;
+package test;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
