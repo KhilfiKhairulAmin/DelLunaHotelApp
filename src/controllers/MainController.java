@@ -1,4 +1,4 @@
-package ewallet.java;
+package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;

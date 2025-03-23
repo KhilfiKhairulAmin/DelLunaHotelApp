@@ -4,6 +4,6 @@ module DelLunaHotelApp {
     requires javafx.fxml;
     requires transitive javafx.graphics;
 
-    opens DelLunaHotelApp to javafx.fxml;
-    exports DelLunaHotelApp;
+    opens main to javafx.fxml;
+    exports main;
 }

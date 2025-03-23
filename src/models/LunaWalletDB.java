@@ -6,7 +6,7 @@
  * The purpose of the e-wallet is for transactions.
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
-package ewallet.java;
+package models;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Handles database operations for LunaWallet
  */
-class LunaWalletDB implements AutoCloseable {
+public class LunaWalletDB implements AutoCloseable {
 	private String UID = "";
 	private String pinHash;
 	private double balance;
@@ -33,7 +33,7 @@ class LunaWalletDB implements AutoCloseable {
 	 * @param UID
 	 * @throws UidNotFound 
 	 */
-	LunaWalletDB(String UID) throws UidNotFound {
+	public LunaWalletDB(String UID) throws UidNotFound {
 		try (Scanner sc = new Scanner(new File(FILE_PATH))) {
 			
 			boolean isHeader = true;
@@ -72,7 +72,7 @@ class LunaWalletDB implements AutoCloseable {
 		}
 	}
 	
-	void save() {
+	public void save() {
 		String out = "UID,PIN,Balance,LunaPoints,SecQuestion,SecAnswer,DateCreated,LastUpdated\n";
 		
 		try (Scanner sc = new Scanner(new File(FILE_PATH))) {
@@ -112,7 +112,7 @@ class LunaWalletDB implements AutoCloseable {
 	 * @param amount
 	 * @throws BalanceLimitExceeded 
 	 */
-	void topUpBalance(double amount) throws BalanceLimitExceeded {
+	public void topUpBalance(double amount) throws BalanceLimitExceeded {
 		if (balance + amount > BALANCE_LIMIT) {
 			throw new BalanceLimitExceeded();
 		}
@@ -124,7 +124,7 @@ class LunaWalletDB implements AutoCloseable {
 	 * @param amount
 	 * @throws NotEnoughBalance 
 	 */
-	void deductBalance(double amount) throws NotEnoughBalance {
+	public void deductBalance(double amount) throws NotEnoughBalance {
 		if (balance - amount < 0) {
 			throw new NotEnoughBalance();
 		}
@@ -135,19 +135,19 @@ class LunaWalletDB implements AutoCloseable {
 	 * Returns amount of balance inside Wallet
 	 * @return
 	 */
-	double getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 	
-	String getPinHash() {
+	public String getPinHash() {
 		return pinHash;
 	}
 	
-	void setPin(String newPin) {
+	public void setPin(String newPin) {
 		pinHash = newPin;
 	}
 	
-	void setSecurityQuestion(String securityQuestion, String answer) {
+	public void setSecurityQuestion(String securityQuestion, String answer) {
 		this.securityQuestion = securityQuestion;
 		this.securityAnswerHash = answer;
 	}
