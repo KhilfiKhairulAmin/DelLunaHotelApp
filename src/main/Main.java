@@ -10,9 +10,7 @@ import javafx.geometry.Rectangle2D;
 import java.io.IOException;
 
 import functions.Logger;
-
-// TODO Refactor project folder structure
-// TODO Comment on code
+	
 // TODO Load page into center (Active Sidebar button controls center)
 
 public class Main extends Application {
@@ -42,10 +40,12 @@ public class Main extends Application {
         Screen screen = Screen.getPrimary();
         Rectangle2D visualBounds = screen.getVisualBounds();
         
-        // Configure windows resolution and rules
+        // Configure windows resolution
         primaryStage.setWidth(visualBounds.getMaxX());
         primaryStage.setHeight(visualBounds.getMaxY());
         logger.info("Resolution: " + (int)visualBounds.getMaxX() + " x " + (int)visualBounds.getMaxY() + " px");
+        
+        // Set window title
         primaryStage.setResizable(true);
         primaryStage.setTitle("LunaWallet Dashboard");
         
