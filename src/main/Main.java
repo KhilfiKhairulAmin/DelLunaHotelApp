@@ -1,23 +1,56 @@
 package main;
-import controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Screen;
+import javafx.geometry.Rectangle2D;
+
+import java.io.IOException;
+
+import functions.Logger;
+
+// TODO Refactor project folder structure
+// TODO Comment on code
+// TODO Load page into center (Active Sidebar button controls center)
 
 public class Main extends Application {
+	
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EWalletMainView.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+    	
+    	// Initialize window
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/Main.fxml"));
+    	Parent root = loader.load();
+    	Scene scene = new Scene(root);
         MainController controller = loader.getController();
         controller.setStage(primaryStage); // Set stage for switching
-        scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
-        primaryStage.setTitle("LunaWallet Dashboard");
-        primaryStage.setScene(scene);
+        Logger logger = Logger.getInstance();
+        
+        // Configure logger
+        try {
+            logger.addOutput(new Logger.FileOutput("logs/application.log"));
+        } catch (IOException e) {
+            logger.error("Failed to create file logger", e);
+        }
+        
+        // Importing stylesheets
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        
+        // Get window resolution (excluding task bar)
+        Screen screen = Screen.getPrimary();
+        Rectangle2D visualBounds = screen.getVisualBounds();
+        
+        // Configure windows resolution and rules
+        primaryStage.setWidth(visualBounds.getMaxX());
+        primaryStage.setHeight(visualBounds.getMaxY());
+        logger.info("Resolution: " + (int)visualBounds.getMaxX() + " x " + (int)visualBounds.getMaxY() + " px");
         primaryStage.setResizable(true);
+        primaryStage.setTitle("LunaWallet Dashboard");
+        
+        // Set window to visible
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

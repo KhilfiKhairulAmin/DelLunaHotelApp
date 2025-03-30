@@ -6,7 +6,7 @@
  * The purpose of the e-wallet is for transactions.
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
-package models;
+package ewallet;
 
 import java.io.File;
 import java.io.FileWriter;

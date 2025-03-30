@@ -1,4 +1,4 @@
-package controllers;
+package main;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -63,7 +63,7 @@ public class MainController {
     
     public void initialize() {
         // Load the image 	
-        Image image = new Image(getClass().getResource("/resources/icon.jpg").toExternalForm(), false);
+        Image image = new Image(getClass().getResource("/media/icon.jpg").toExternalForm(), false);
         appLogoContainer.setFill(new ImagePattern(image));
         
         selectedPane = homeStack;
@@ -80,7 +80,6 @@ public class MainController {
                 
             }
         }
-        
     }
     
     public void setStage(Stage stage) {
