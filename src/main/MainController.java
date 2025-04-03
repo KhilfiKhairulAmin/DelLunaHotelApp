@@ -62,7 +62,7 @@ public class MainController {
     private StackPane curPane;
     
     public void initialize() {
-        // Load the image 	
+        // Load the sidebar
         Image image = new Image(getClass().getResource("/media/icon.jpg").toExternalForm(), false);
         appLogoContainer.setFill(new ImagePattern(image));
         
