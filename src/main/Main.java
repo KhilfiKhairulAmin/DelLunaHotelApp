@@ -6,24 +6,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
+import auth.SignUpController;
 
 import java.io.IOException;
 
 import functions.Logger;
-	
-// TODO Load page into center (Active Sidebar button controls center)
 
 public class Main extends Application {
 	
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	
+
     	// Initialize window
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/Main.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/auth/SignUp.fxml"));
     	Parent root = loader.load();
     	Scene scene = new Scene(root);
-        MainController controller = loader.getController();
-        controller.setStage(primaryStage); // Set stage for switching
         Logger logger = Logger.getInstance();
         
         // Configure logger
