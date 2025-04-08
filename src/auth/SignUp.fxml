@@ -4,10 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.*?>
 
-<BorderPane prefWidth="1366" prefHeight="720" xmlns="http://javafx.com/javafx/17" stylesheets="@../styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.SignUpController">
+<BorderPane prefWidth="1366" prefHeight="720" xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.SignUpController"
+            stylesheets="@../styles.css">
 
     <!-- Left Side: Form -->
     <left>
@@ -39,11 +39,26 @@
                 <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
                 <TextField fx:id="phoneField" promptText="+1 (123) 456-7890" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
                 <Label fx:id="phoneError" style="-fx-text-fill: red;" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+                
+				<!-- Gender Question -->
+                <Label text="Gender:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="genderBox" promptText="Select a gender" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label fx:id="genderError" style="-fx-text-fill: red;" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
 
                 <!-- Password Field -->
-                <Label text="Password:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <PasswordField fx:id="passwordField" promptText="At least 8 characters" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-                <Label fx:id="passwordError" style="-fx-text-fill: red;" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+                <Label text="Password:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <PasswordField fx:id="passwordField" promptText="At least 8 characters" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label fx:id="passwordError" style="-fx-text-fill: red;" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+
+                <!-- Security Question -->
+                <Label text="Security Question:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="securityQuestionBox" promptText="Select a question" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <Label fx:id="securityQuestionError" style="-fx-text-fill: red;" GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+
+                <!-- Security Answer -->
+                <Label text="Security Answer:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextField fx:id="securityAnswerField" promptText="Your answer" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                <Label fx:id="securityAnswerError" style="-fx-text-fill: red;" GridPane.rowIndex="6" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
             </GridPane>
 
             <!-- Submit Button -->
@@ -61,7 +76,6 @@
     <right>
         <StackPane style="-fx-background-color: #e6f7ff;" prefWidth="683">
             <VBox alignment="CENTER" spacing="20">
-
                 <Text text="Welcome to Our Hotel!" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
                 <Text text="Book your perfect stay with us." style="-fx-font-size: 16; -fx-fill: #555;"/>
                 <Text text="Sign up to get started!" style="-fx-font-size: 14; -fx-fill: #777;"/>

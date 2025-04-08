@@ -58,7 +58,7 @@ public class SignInController {
     	
         if (isValid) {
             try {
-                boolean isValidGuest = GuestDB.verifyGuest(emailField.getText(), passwordField.getText());
+                boolean isValidGuest = GuestDB.verifyLogin(emailField.getText(), passwordField.getText());
                 
                 if (isValidGuest) {
                 	showAlert(Alert.AlertType.INFORMATION, "Success", "Logged in successfully!");

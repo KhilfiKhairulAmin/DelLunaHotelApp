@@ -16,7 +16,9 @@ import model.GuestDB;
 
 import java.io.IOException;       // Error handling package
 import java.util.List;
-import java.util.regex.Pattern;   // Input validation package
+import java.util.regex.Pattern;
+
+import functions.Logger;   // Input validation package
 
 
 public class SignUpController {
@@ -28,17 +30,41 @@ public class SignUpController {
     @FXML private TextField emailField;
     @FXML private TextField phoneField;
     @FXML private PasswordField passwordField;
+    @FXML private ComboBox<String> securityQuestionBox;
+    @FXML private TextField securityAnswerField;
+    @FXML private ComboBox<String> genderBox;
+    @FXML private ComboBox<String> personalityComboBox;
     
     // These are fields to display error messages
     @FXML private Label nameError;
     @FXML private Label emailError;
     @FXML private Label phoneError;
+    @FXML private Label genderError;
     @FXML private Label passwordError;
+    @FXML private Label securityQuestionError;
+    @FXML private Label securityAnswerError;
+    
+    Logger logger = Logger.getInstance();
+    
 
     // These are regular expressions for input validation
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
     private static final Pattern PHONE_PATTERN = Pattern.compile("^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$");
+
+    @FXML public void initialize() {
+        securityQuestionBox.getItems().addAll(
+                "What was your first pet's name?",
+                "What city were you born in?",
+                "What is your mother's maiden name?",
+                "What was your first school's name?",
+                "What is your favorite book?"
+            );
+        genderBox.getItems().addAll(
+        		"Male",
+        		"Female"
+            );
+    }
     
     /**
      * Handle Sign Up button click event
@@ -78,12 +104,30 @@ public class SignUpController {
             isValid = false;
         }
         
+        // Security question validation
+        if (genderBox.getValue() == null) {
+        	genderError.setText("Gender is required");
+            isValid = false;
+        }
+        
         // Password validation
         if (passwordField.getText().isEmpty()) {
             passwordError.setText("Password is required");
             isValid = false;
         } else if (!PASSWORD_PATTERN.matcher(passwordField.getText()).matches()) {
             passwordError.setText("Password must be 8+ chars with uppercase, lowercase, number and special char");
+            isValid = false;
+        }
+        
+        // Security question validation
+        if (securityQuestionBox.getValue() == null) {
+        	securityQuestionError.setText("Security answer is required");
+            isValid = false;
+        }
+        
+        // Security answer validation
+        if (securityAnswerField.getText().isEmpty()) {
+        	securityAnswerError.setText("Security answer is required");
             isValid = false;
         }
         
@@ -97,8 +141,23 @@ public class SignUpController {
             	guests.removeIf(guest -> !guest.getEmail().equals(emailField.getText()));
             	
             	if (guests.size() == 0) {  // No one has the same email as the entered one
-            		Guest newGuest = new Guest(null, nameField.getText(), emailField.getText(), phoneField.getText());            		
-            		GuestDB.addGuest(newGuest, passwordField.getText());
+                    Guest newGuest = new Guest(
+                            null, // ID will be auto-generated
+                            emailField.getText(),
+                            nameField.getText(),
+                            phoneField.getText(),
+                            genderBox.getValue(),
+                            "Newcomer",
+                            securityQuestionBox.getValue(),
+                            null, // Password hash will be set
+                            null  // Security answer hash will be set
+                        );
+                        
+                        GuestDB.addGuest(
+                            newGuest,
+                            passwordField.getText(),
+                            securityAnswerField.getText()
+                        );
             	}
             	else {  // Someone already took the email
             		throw new Exception("Email already taken");
@@ -135,7 +194,10 @@ public class SignUpController {
         nameError.setText("");
         emailError.setText("");
         phoneError.setText("");
+        genderError.setText("");
         passwordError.setText("");
+        securityQuestionError.setText("");
+        securityAnswerError.setText("");
     }
 
     /**
