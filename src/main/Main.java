@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
-import auth.SignUpController;
 
 import java.io.IOException;
 
+import auth.SignUpController;
 import functions.Logger;
 
 public class Main extends Application {

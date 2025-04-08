@@ -1,4 +1,4 @@
-package auth;
+package model;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -163,11 +163,4 @@ public class GuestDB {
                 passwordHash);
     }
 
-    private static Guest parseGuestFromLine(String line) {
-        String[] parts = line.split(",");
-        if (parts.length != 5) {
-            throw new IllegalArgumentException("Invalid guest data format: " + line);
-        }
-        return new Guest(parts[0].trim(), parts[1].trim(), parts[2].trim(), parts[3].trim());
-    }
 }

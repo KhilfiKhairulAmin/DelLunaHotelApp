@@ -11,6 +11,7 @@ import javafx.scene.Node;		  // Scene management packages
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.GuestDB;
 
 import java.io.IOException;		  // Error handling package
 

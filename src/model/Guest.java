@@ -1,4 +1,4 @@
-package auth;
+package model;
 
 public class Guest {
     private String guestId;
