@@ -93,6 +93,20 @@ public class SignInController {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Handle Forgot Password link click event
+     * @param event
+     */
+    @FXML private void switchToForgotPassword(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/auth/ForgotPassword.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1366, 720));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Transition to Homepage

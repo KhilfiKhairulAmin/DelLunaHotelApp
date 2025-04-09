@@ -25,19 +25,23 @@ public class ForgotPasswordController {
 	
 	// These are fields entered by the user
     @FXML private TextField emailField;
-    @FXML private TextField pinField;
+    @FXML private TextField securityQuestionField;
+    @FXML private TextField securityAnswerField;
     @FXML private PasswordField passwordField;
-    @FXML private PasswordField confirmPasswordField;
     
     // These are fields to display error messages
     @FXML private Label emailError;
-    @FXML private Label pinError;
+    @FXML private Label securityAnswerError;
     @FXML private Label passwordError;
-    @FXML private Label confirmPasswordError;
+    
+    @FXML private Button submitButton;
 
     // These are regular expressions for input validation
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$");
+    
+    private String previousEmail = "";
+    private Guest guest = null;
     
     /**
      * Handle Sign Up button click event
@@ -50,12 +54,9 @@ public class ForgotPasswordController {
         // Validate inputs
         boolean isValid = true;
         
-        // Phone validation
-        if (phoneField.getText().isEmpty()) {
-            phoneError.setText("Phone is required");
-            isValid = false;
-        } else if (!PHONE_PATTERN.matcher(phoneField.getText()).matches()) {
-            phoneError.setText("Invalid phone format");
+        // Security answer validation
+        if (securityAnswerField.getText().isEmpty()) {
+        	securityAnswerError.setText("Security answer is required");
             isValid = false;
         }
         
@@ -71,43 +72,73 @@ public class ForgotPasswordController {
         // If all valid, proceed to sign up
         if (isValid) {
             try {
-            	// Get a copy of all guests
-            	List<Guest> guests = GuestDB.getAllGuests();
-            	
-            	// Checks if email is unique by removing guests that doesn't have the same email as the entered email
-            	guests.removeIf(guest -> !guest.getEmail().equals(emailField.getText()));
-            	
-            	if (guests.size() == 0) {  // No one has the same email as the entered one
-            		Guest newGuest = new Guest(null, nameField.getText(), emailField.getText(), phoneField.getText());            		
-            		GuestDB.addGuest(newGuest, passwordField.getText());
+            	if (guest != null && GuestDB.verifySecurityAnswer(emailField.getText(), securityAnswerField.getText())) {
+                    GuestDB.updateGuest(guest, passwordField.getText());
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Reset password successfully!");
+                    switchToSignIn(event);
             	}
-            	else {  // Someone already took the email
-            		throw new Exception("Email already taken");
+            	else {
+            		showAlert(Alert.AlertType.INFORMATION, "Error", "Invalid credentials");
             	}
                 
-                // For now, just show success and go to home page
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
-                loadHomePage(event);
             } catch (Exception e) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to create account: " + e.getMessage());
             }
         }
     }
     
-    @FXML private void handleSendPin(ActionEvent event) {
-    	
-    	boolean isValid = true;
-    	
+    @FXML private void handleSubmitEmail(ActionEvent event) {
+        // Reset error messages
+        clearErrors();
+        
+        // Validate inputs
+        boolean isValid = true;
+        
         // Email validation
         if (emailField.getText().isEmpty()) {
-            emailError.setText("Email is required");
+        	emailError.setText("Email is required");
             isValid = false;
         } else if (!EMAIL_PATTERN.matcher(emailField.getText()).matches()) {
-            emailError.setText("Invalid email format");
+        	emailError.setText("Invalid email format");
             isValid = false;
         }
         
-        
+        // If all valid, proceed to sign up
+        if (isValid) {
+            try {
+            	if (previousEmail == emailField.getText()) {
+            		previousEmail = emailField.getText();
+            		return;
+            	}
+            	
+            	// Get a copy of all guests
+            	guest = GuestDB.getGuestByEmail(emailField.getText());
+            	
+            	String securityQuestion = "";
+            	if (guest != null) {
+            		securityQuestion = guest.getSecurityQuestion();
+            	}
+            	else {
+            		String[] securityQuestions = {
+                            "What was your first pet's name?",
+                            "What city were you born in?",
+                            "What is your mother's maiden name?",
+                            "What was your first school's name?",
+                            "What is your favorite book?"
+            		};
+            		securityQuestion = securityQuestions[(int)Math.random()*5];
+            	}            	
+        		securityQuestionField.setText(securityQuestion);
+        		securityQuestionField.setDisable(false);
+        		securityQuestionField.setEditable(false);
+        		securityAnswerField.setDisable(false);
+        		passwordField.setDisable(false);
+        		submitButton.setDisable(false);
+
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to submit email: " + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -129,21 +160,8 @@ public class ForgotPasswordController {
      * Reset error fields to default text
      */
     private void clearErrors() {
-        nameError.setText("");
         emailError.setText("");
-        phoneError.setText("");
-        passwordError.setText("");
-    }
-
-    /**
-     * Transition to Homepage
-     * @param event
-     * @throws IOException
-     */
-    private void loadHomePage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/main/Main.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root, 1366, 720));
+        securityAnswerError.setText("");
     }
 
     /**

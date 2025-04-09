@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
     	// Initialize window
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/auth/SignUp.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/auth/SignIn.fxml"));
     	Parent root = loader.load();
     	Scene scene = new Scene(root);
         Logger logger = Logger.getInstance();

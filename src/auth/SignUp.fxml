@@ -37,7 +37,7 @@
 
                 <!-- Phone Field -->
                 <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="phoneField" promptText="+1 (123) 456-7890" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <TextField fx:id="phoneField" promptText="0123456789" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
                 <Label fx:id="phoneError" style="-fx-text-fill: red;" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
                 
 				<!-- Gender Question -->

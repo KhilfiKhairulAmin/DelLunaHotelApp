@@ -37,7 +37,7 @@
                 <!-- Remember Me & Forgot Password -->
                 <HBox spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="1">
                     <CheckBox fx:id="rememberMeCheckbox" text="Remember me"/>
-                    <Hyperlink text="Forgot password?" style="-fx-text-fill: #0066cc;"/>
+                    <Hyperlink text="Forgot password?" onAction="#switchToForgotPassword" style="-fx-text-fill: #0066cc;"/>
                 </HBox>
             </GridPane>
 

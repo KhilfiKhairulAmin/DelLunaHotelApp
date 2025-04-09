@@ -153,13 +153,17 @@ public class GuestDB {
     }
 
     // Update guest information
-    public static void updateGuest(Guest updatedGuest) throws IOException {
+    public static void updateGuest(Guest updatedGuest, String newPassword) throws IOException {
+    	
         List<Guest> guests = getAllGuests();
         boolean found = false;
         
         for (int i = 0; i < guests.size(); i++) {
             if (guests.get(i).getGuestId().equals(updatedGuest.getGuestId())) {
-                guests.set(i, updatedGuest);
+            	if (newPassword != null) {
+            		updatedGuest.setHashPassword(hashString(newPassword));            		
+            	}
+            	guests.set(i, updatedGuest);
                 found = true;
                 break;
             }
