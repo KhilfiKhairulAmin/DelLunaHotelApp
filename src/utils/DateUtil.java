@@ -4,7 +4,7 @@
  * Description:
  * This file is used for handling date data type.
  */
-package functions;
+package utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

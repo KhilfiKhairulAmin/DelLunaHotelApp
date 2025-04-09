@@ -4,13 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.Logger;
 import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
 
 import java.io.IOException;
 
 import auth.SignUpController;
-import functions.Logger;
 
 public class Main extends Application {
 	

@@ -6,7 +6,7 @@
  * The purpose of the e-wallet is for transactions.
  * User can top-up money inside the e-wallet and obtain points for future use.
  */
-package functions;
+package utils;
 import javax.swing.*;
 
 import ewallet.LunaWalletDB;

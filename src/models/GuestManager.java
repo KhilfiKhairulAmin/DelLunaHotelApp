@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import java.io.*;
 import java.nio.file.*;
@@ -6,7 +6,7 @@ import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class GuestDB {
+public class GuestManager {
     private static final String FILE_PATH = "src/data/guests.txt";
     private static final String ID_PREFIX = "G";
     private static int nextId = 1;

@@ -11,7 +11,7 @@ import javafx.scene.Node;		  // Scene management packages
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.GuestDB;
+import models.GuestManager;
 
 import java.io.IOException;		  // Error handling package
 
@@ -58,7 +58,7 @@ public class SignInController {
     	
         if (isValid) {
             try {
-                boolean isValidGuest = GuestDB.verifyLogin(emailField.getText(), passwordField.getText());
+                boolean isValidGuest = GuestManager.verifyLogin(emailField.getText(), passwordField.getText());
                 
                 if (isValidGuest) {
                 	showAlert(Alert.AlertType.INFORMATION, "Success", "Logged in successfully!");

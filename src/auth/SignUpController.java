@@ -11,14 +11,13 @@ import javafx.scene.Parent;       // Scene management packages
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import model.Guest;
-import model.GuestDB;
+import models.Guest;
+import models.GuestManager;
+import utils.Logger;
 
 import java.io.IOException;       // Error handling package
 import java.util.List;
 import java.util.regex.Pattern;
-
-import functions.Logger;   // Input validation package
 
 
 public class SignUpController {
@@ -135,7 +134,7 @@ public class SignUpController {
         if (isValid) {
             try {
             	// Get a copy of all guests
-            	List<Guest> guests = GuestDB.getAllGuests();
+            	List<Guest> guests = GuestManager.getAllGuests();
             	
             	// Checks if email is unique by removing guests that doesn't have the same email as the entered email
             	guests.removeIf(guest -> !guest.getEmail().equals(emailField.getText()));
@@ -153,7 +152,7 @@ public class SignUpController {
                             null  // Security answer hash will be set
                         );
                         
-                        GuestDB.addGuest(
+                        GuestManager.addGuest(
                             newGuest,
                             passwordField.getText(),
                             securityAnswerField.getText()

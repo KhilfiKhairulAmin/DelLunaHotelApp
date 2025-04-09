@@ -11,8 +11,8 @@ import javafx.scene.Parent;       // Scene management packages
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import model.Guest;
-import model.GuestDB;
+import models.Guest;
+import models.GuestManager;
 
 import java.io.IOException;       // Error handling package
 import java.util.List;
@@ -72,8 +72,8 @@ public class ForgotPasswordController {
         // If all valid, proceed to sign up
         if (isValid) {
             try {
-            	if (guest != null && GuestDB.verifySecurityAnswer(emailField.getText(), securityAnswerField.getText())) {
-                    GuestDB.updateGuest(guest, passwordField.getText());
+            	if (guest != null && GuestManager.verifySecurityAnswer(emailField.getText(), securityAnswerField.getText())) {
+                    GuestManager.updateGuest(guest, passwordField.getText());
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Reset password successfully!");
                     switchToSignIn(event);
             	}
@@ -112,7 +112,7 @@ public class ForgotPasswordController {
             	}
             	
             	// Get a copy of all guests
-            	guest = GuestDB.getGuestByEmail(emailField.getText());
+            	guest = GuestManager.getGuestByEmail(emailField.getText());
             	
             	String securityQuestion = "";
             	if (guest != null) {
