@@ -4,28 +4,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.paint.Color?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="controllers.AccountController" spacing="20" style="-fx-background-color: #f5f5f5;">
+<VBox prefHeight="720.0" prefWidth="1194.0" spacing="20" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
     <padding>
-        <Insets top="40" right="40" bottom="40" left="40"/>
+        <Insets bottom="40" left="40" right="40" top="40" />
     </padding>
     
-    <HBox spacing="20" alignment="CENTER_LEFT">
-	<Circle radius="50" fill="#d5acd1">
+    <HBox alignment="CENTER_LEFT" spacing="20">
+	<Circle fill="#d5acd1" radius="50">
 	    <stroke>
 	        <Color fx:constant="WHITE" />
 	    </stroke>
 	</Circle>
         <VBox spacing="5">
-            <Label text="Account Information" style="-fx-font-weight: bold; -fx-font-size: 24;">
+            <Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Account Information">
                 <font>
                     <Font name="Arial" size="24.0" />
                 </font>
@@ -37,29 +34,29 @@
     <Separator />
     
     <VBox spacing="15">
-        <Label text="Personal Details" style="-fx-font-weight: bold; -fx-font-size: 18;" />
+        <Label style="-fx-font-weight: bold; -fx-font-size: 18;" text="Personal Details" />
         
         <HBox spacing="20">
-            <VBox spacing="10" prefWidth="200">
-                <Label text="Guest ID:" style="-fx-text-fill: #666;"/>
-                <Label text="Name:" style="-fx-text-fill: #666;"/>
-                <Label text="Email:" style="-fx-text-fill: #666;"/>
-                <Label text="Phone:" style="-fx-text-fill: #666;"/>
-                <Label text="Gender:" style="-fx-text-fill: #666;"/>
+            <VBox prefWidth="200" spacing="10">
+                <Label style="-fx-text-fill: #666;" text="Guest ID:" />
+                <Label style="-fx-text-fill: #666;" text="Name:" />
+                <Label style="-fx-text-fill: #666;" text="Email:" />
+                <Label style="-fx-text-fill: #666;" text="Phone:" />
+                <Label style="-fx-text-fill: #666;" text="Gender:" />
             </VBox>
             <VBox spacing="10">
-                <Label fx:id="guestIdLabel" style="-fx-font-weight: bold;"/>
-                <Label fx:id="nameLabel" style="-fx-font-weight: bold;"/>
-                <Label fx:id="emailLabel" style="-fx-font-weight: bold;"/>
-                <Label fx:id="phoneLabel" style="-fx-font-weight: bold;"/>
-                <Label fx:id="genderLabel" style="-fx-font-weight: bold;"/>
+                <Label fx:id="guestIdLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="nameLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="emailLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="phoneLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="genderLabel" style="-fx-font-weight: bold;" />
             </VBox>
         </HBox>
     </VBox>
     
-    <Button text="Edit Profile" onAction="#handleEditProfile" style="-fx-background-color: #d5acd1; -fx-text-fill: white; -fx-font-weight: bold;">
+    <Button onAction="#handleEditProfile" style="-fx-background-color: #d5acd1; -fx-text-fill: white; -fx-font-weight: bold;" text="Edit Profile">
         <padding>
-            <Insets top="8" right="16" bottom="8" left="16"/>
+            <Insets bottom="8" left="16" right="16" top="8" />
         </padding>
     </Button>
 </VBox>
