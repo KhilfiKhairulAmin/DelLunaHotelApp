@@ -10,8 +10,6 @@ import javafx.geometry.Rectangle2D;
 
 import java.io.IOException;
 
-import controllers.SignUpController;
-
 public class Main extends Application {
 	
     @Override
