@@ -1,4 +1,4 @@
-package auth;
+package controllers;
 
 import javafx.event.ActionEvent;  // Event handling package
 
@@ -147,7 +147,7 @@ public class ForgotPasswordController {
      */
     @FXML private void switchToSignIn(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/auth/SignIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/SignIn.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1366, 720));
         } catch (IOException e) {

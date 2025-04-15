@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 
-<BorderPane prefWidth="1366" prefHeight="720" xmlns="http://javafx.com/javafx/17" stylesheets="@../styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.SignInController">
+<BorderPane prefWidth="1366" prefHeight="720" xmlns="http://javafx.com/javafx/17" stylesheets="@../styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignInController">
 
     <!-- Left Side: Form -->
     <left>

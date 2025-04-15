@@ -10,7 +10,7 @@ import javafx.geometry.Rectangle2D;
 
 import java.io.IOException;
 
-import auth.SignUpController;
+import controllers.SignUpController;
 
 public class Main extends Application {
 	
@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
     	// Initialize window
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/auth/SignIn.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SignIn.fxml"));
     	Parent root = loader.load();
     	Scene scene = new Scene(root);
         Logger logger = Logger.getInstance();

@@ -9,7 +9,7 @@
 package utils;
 import javax.swing.*;
 
-import ewallet.LunaWalletDB;
+import models.LunaWalletDB;
 
 import java.awt.*;
 import java.awt.event.*;

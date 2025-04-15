@@ -1,4 +1,4 @@
-package auth;
+package controllers;
 
 import javafx.event.ActionEvent;  // Event handling package
 
@@ -177,7 +177,7 @@ public class SignUpController {
      */
     @FXML private void switchToSignIn(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/auth/SignIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/SignIn.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1366, 720));
         } catch (IOException e) {
@@ -205,7 +205,7 @@ public class SignUpController {
      * @throws IOException
      */
     private void loadHomePage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/main/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root, 1366, 720));
     }
