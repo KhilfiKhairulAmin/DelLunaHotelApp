@@ -68,7 +68,7 @@ public class SignUpController {
         		"Female"
             );
 
-        Image image = new Image(getClass().getResource("/media/sign_up.jpg").toExternalForm(), false);
+        Image image = new Image(getClass().getResource("/media/sign_up.png").toExternalForm(), false);
         signUpImageContainer.setFill(new ImagePattern(image));
     }
     
