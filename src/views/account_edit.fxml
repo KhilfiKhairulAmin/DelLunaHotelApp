@@ -9,13 +9,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="controllers.AccountEditController" spacing="20" style="-fx-background-color: #f5f5f5;">
+<VBox prefHeight="720.0" prefWidth="1192.0" spacing="20" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountEditController">
     <padding>
-        <Insets top="40" right="40" bottom="40" left="40"/>
+        <Insets bottom="40" left="40" right="40" top="40" />
     </padding>
     
-    <Label text="Edit Profile" style="-fx-font-weight: bold; -fx-font-size: 24;">
+    <Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Edit Profile">
         <font>
             <Font name="Arial" size="24.0" />
         </font>
@@ -24,29 +23,29 @@
     <Separator />
     
     <VBox spacing="15">
-        <Label text="Personal Details" style="-fx-font-weight: bold; -fx-font-size: 18;" />
+        <Label style="-fx-font-weight: bold; -fx-font-size: 18;" text="Personal Details" />
         
         <VBox spacing="10">
-            <Label text="Name:" style="-fx-text-fill: #666;"/>
-            <TextField fx:id="nameField" promptText="Enter your name"/>
+            <Label style="-fx-text-fill: #666;" text="Name:" />
+            <TextField fx:id="nameField" promptText="Enter your name" />
             
-            <Label text="Phone:" style="-fx-text-fill: #666;"/>
-            <TextField fx:id="phoneField" promptText="Enter your phone number"/>
+            <Label style="-fx-text-fill: #666;" text="Phone:" />
+            <TextField fx:id="phoneField" promptText="Enter your phone number" />
             
-            <Label text="Gender:" style="-fx-text-fill: #666;"/>
-            <TextField fx:id="genderField" promptText="Enter your gender"/>
+            <Label style="-fx-text-fill: #666;" text="Gender:" />
+            <TextField fx:id="genderField" promptText="Enter your gender" />
         </VBox>
     </VBox>
     
     <HBox spacing="10">
-        <Button text="Save Changes" onAction="#handleSaveChanges" style="-fx-background-color: #d5acd1; -fx-text-fill: white; -fx-font-weight: bold;">
+        <Button onAction="#handleSaveChanges" style="-fx-background-color: #d5acd1; -fx-text-fill: white; -fx-font-weight: bold;" text="Save Changes">
             <padding>
-                <Insets top="8" right="16" bottom="8" left="16"/>
+                <Insets bottom="8" left="16" right="16" top="8" />
             </padding>
         </Button>
-        <Button text="Cancel" onAction="#handleCancel" style="-fx-background-color: #cccccc; -fx-text-fill: #333; -fx-font-weight: bold;">
+        <Button onAction="#handleCancel" style="-fx-background-color: #cccccc; -fx-text-fill: #333; -fx-font-weight: bold;" text="Cancel">
             <padding>
-                <Insets top="8" right="16" bottom="8" left="16"/>
+                <Insets bottom="8" left="16" right="16" top="8" />
             </padding>
         </Button>
     </HBox>
