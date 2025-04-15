@@ -6,7 +6,9 @@ import javafx.fxml.FXML;          // FXML packages
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.control.*;    // UI components package
-
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.Parent;       // Scene management packages
 import javafx.scene.Scene;
 import javafx.scene.Node;
@@ -42,6 +44,8 @@ public class SignUpController {
     @FXML private Label passwordError;
     @FXML private Label securityQuestionError;
     @FXML private Label securityAnswerError;
+
+    @FXML private Rectangle signUpImageContainer;
     
     Logger logger = Logger.getInstance();
     
@@ -63,6 +67,9 @@ public class SignUpController {
         		"Male",
         		"Female"
             );
+
+        Image image = new Image(getClass().getResource("/media/sign_up.jpg").toExternalForm(), false);
+        signUpImageContainer.setFill(new ImagePattern(image));
     }
     
     /**
