@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -11,14 +12,34 @@
 
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1366.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <left>
-      <VBox fx:id="stackPaneContainer" prefHeight="720.0" prefWidth="172.0" styleClass="sidebar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+      <VBox fx:id="stackPaneContainer" prefHeight="720.0" prefWidth="210.0" styleClass="sidebar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="125.0" prefWidth="172.0">
+            <StackPane alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="210.0">
                <children>
-                  <Circle fx:id="appLogoContainer" fill="WHITE" radius="48.0" stroke="#ffffff00" strokeType="INSIDE" />
+                  <Circle fx:id="appLogoContainer" fill="WHITE" radius="28.0" stroke="#ffffff00" strokeType="INSIDE" StackPane.alignment="TOP_LEFT">
+                     <StackPane.margin>
+                        <Insets left="22.0" top="20.0" />
+                     </StackPane.margin></Circle>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sidebar-component" text="Del Luna" textAlignment="RIGHT" wrappingWidth="193.13671875" StackPane.alignment="TOP_LEFT">
+                     <font>
+                        <Font name="Jokerman" size="24.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets top="22.0" />
+                     </StackPane.margin>
+                  </Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sidebar-component" text="HOTEL" textAlignment="RIGHT" wrappingWidth="134.13671875">
+                     <font>
+                        <Font name="LiSu" size="18.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets top="26.0" />
+                     </StackPane.margin>
+                  </Text>
+                  <Separator opacity="0.18" prefHeight="5.0" prefWidth="134.0" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane fx:id="homeStack" prefHeight="60.0" prefWidth="172.0" styleClass="sidebar-component">
+            <StackPane fx:id="homeStack" prefHeight="65.0" prefWidth="210.0" styleClass="sidebar-component">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sidebar-component" text="Home" wrappingWidth="120.13671875">
                      <font>
@@ -38,7 +59,7 @@
             </StackPane>
             <StackPane fx:id="rewardsStack" prefHeight="65.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rewards" wrappingWidth="120.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Packages" wrappingWidth="120.13671875">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -53,7 +74,7 @@
                      </font>
                   </Text>
                </children></StackPane>
-            <StackPane prefHeight="220.0" prefWidth="172.0" styleClass="sidebar-whitespace" />
+            <StackPane prefHeight="220.0" prefWidth="210.0" styleClass="sidebar-whitespace" />
             <StackPane fx:id="accountStack" prefHeight="65.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account" wrappingWidth="120.13671875">

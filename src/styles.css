@@ -95,7 +95,7 @@
 .sidebar-component {
     -fx-background-color: transparent;
     -fx-padding: 15 25;
-    -fx-font-size: 14px;
+    /* -fx-font-size: 14px; */
     -fx-text-fill: white;
     -fx-transition: all 0.3s;
 }
