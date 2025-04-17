@@ -10,7 +10,7 @@
 
 <ScrollPane hbarPolicy="NEVER" hmax="100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="600.0" vmax="100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomSelectionController">
    <content>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1315.0" prefWidth="800.0" style="-fx-background-color: #CBD6F8;">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1315.0" prefWidth="1192.0" style="-fx-background-color: #CBD6F8;">
          <children>
             <HBox prefHeight="80.0" prefWidth="300.0" spacing="5.0" style="-fx-border-color: lightgray; -fx-border-width: 1;">
                <children>
