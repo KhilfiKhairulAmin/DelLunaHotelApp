@@ -88,7 +88,7 @@
 
 /* Enhanced Sidebar */
 .sidebar {
-    -fx-background-color: linear-gradient(to bottom, #6e62aa, #5b4e9e);
+    -fx-background-color: #6e62aa;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 3, 0);
 }
 
