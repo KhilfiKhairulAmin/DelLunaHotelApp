@@ -18,7 +18,6 @@ public class Main extends Application {
     // TONIGHT: Target 6 hours (ETA 6am)
     // TODO Room Listings (Data + Looping)
     // TODO Change Sidebar to reflect current changes
-    // TODO Room
 	
     @Override
     public void start(Stage primaryStage) throws Exception {
