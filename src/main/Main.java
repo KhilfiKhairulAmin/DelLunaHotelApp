@@ -11,6 +11,14 @@ import javafx.geometry.Rectangle2D;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    // We only have tonight (5 hours), saturday (10 hours)
+    // sunday (10 hours), monday (4 hours), tuesday (4 hours), wednesday (6 hours)
+
+    // TONIGHT: Target 6 hours (ETA 6am)
+    // TODO Room Listings (Data + Looping)
+    // TODO Change Sidebar to reflect current changes
+    // TODO Room
 	
     @Override
     public void start(Stage primaryStage) throws Exception {
