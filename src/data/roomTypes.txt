@@ -1,0 +1,9 @@
+typeId,typeName,pricePerNight,amenities
+1,single,90,1 Single Bed|Private Bathroom|WiFi|Air Conditioning
+2,double,140,1 Queen Bed|Private Bathroom|WiFi|TV
+3,triple,180,3 Twin Beds|Private Bathroom|WiFi|Mini Fridge
+4,quad,220,2 Double Beds|Private Bathroom|WiFi|Balcony|TV
+5,executive,300,1 King Bed|Private Bathroom|Smart TV|Work Desk|Lounge Area
+6,suite,400,1 King Bed|Private Bathroom|Jacuzzi|Mini Bar|Living Room
+7,family,350,2 Queen Beds|Private Bathroom|WiFi|Mini Kitchen|Dining Area
+8,honeymoon suite,500,1 King Bed|Jacuzzi|Romantic Decor|Couple's Spa Access|Ocean View
