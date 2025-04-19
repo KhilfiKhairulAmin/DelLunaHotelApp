@@ -14,7 +14,7 @@
    <left>
       <VBox fx:id="stackPaneContainer" prefHeight="720.0" prefWidth="210.0" styleClass="sidebar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
-            <StackPane alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="210.0">
+            <StackPane alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="210.0">
                <children>
                   <Circle fx:id="appLogoContainer" fill="WHITE" radius="28.0" stroke="#ffffff00" strokeType="INSIDE" StackPane.alignment="TOP_LEFT">
                      <StackPane.margin>
@@ -28,12 +28,12 @@
                         <Insets top="22.0" />
                      </StackPane.margin>
                   </Text>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sidebar-component" text="HOTEL" textAlignment="RIGHT" wrappingWidth="134.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sidebar-component" text="HOTEL" textAlignment="RIGHT" wrappingWidth="134.13671875" StackPane.alignment="TOP_LEFT">
                      <font>
                         <Font name="LiSu" size="18.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets top="26.0" />
+                        <Insets top="56.0" />
                      </StackPane.margin>
                   </Text>
                   <Separator opacity="0.18" prefHeight="5.0" prefWidth="134.0" StackPane.alignment="BOTTOM_CENTER" />
@@ -59,7 +59,7 @@
             </StackPane>
             <StackPane fx:id="rewardsStack" prefHeight="65.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Packages" wrappingWidth="120.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" wrappingWidth="120.13671875">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -68,7 +68,7 @@
             </StackPane>
             <StackPane fx:id="bookingsStack" prefHeight="65.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" wrappingWidth="120.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Checklist" wrappingWidth="120.13671875">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -77,7 +77,7 @@
             <StackPane prefHeight="220.0" prefWidth="210.0" styleClass="sidebar-whitespace" />
             <StackPane fx:id="accountStack" prefHeight="65.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account" wrappingWidth="120.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Luna Wallet" wrappingWidth="120.13671875">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -86,7 +86,7 @@
             </StackPane>
             <StackPane fx:id="logoutStack" prefHeight="60.0" prefWidth="172.0" styleClass="sidebar-component">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Logout" wrappingWidth="120.13671875">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Account" wrappingWidth="120.13671875">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>

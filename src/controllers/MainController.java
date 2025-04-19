@@ -111,7 +111,7 @@ public class MainController {
         if (clickedStack == homeStack) {
             loadView("/views/home.fxml");
         } else if (clickedStack == exploreStack) {
-            loadView("/views/selectingRooms.fxml");
+            loadView("/views/SelectingRooms2.fxml");
         } else if (clickedStack == rewardsStack) {
             loadView("/views/rewards.fxml");
         } else if (clickedStack == bookingsStack) {
